@@ -1,0 +1,53 @@
+﻿<Window x:Class="Hospital.View.Reception.RegisterPatientWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:Hospital.ViewModel.Reception"
+        Title="RegisterPatientWindow" Height="391.045" Width="534.328">
+<!--
+    <Window.DataContext>
+        <vm:RegisterPatientWindowViewModel />
+    </Window.DataContext>-->
+
+    <Grid  Height="350" Width="525" Background="Bisque">
+        <TextBlock Height="23" HorizontalAlignment="Left" Margin="10,5,0,0" Name="textBlockHeading" Text="Register new patient:" VerticalAlignment="Top" Width="191"  FontSize="17" FontStretch="ExtraCondensed"/>
+        
+        <Grid Margin="10,0,50,25" Background="White" Height="264" VerticalAlignment="Bottom">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="252*" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Height="20" HorizontalAlignment="Left" Margin="67,0,0,0" Text="{Binding ErrorMessage}" VerticalAlignment="Top" Width="247"  OpacityMask="Crimson" Foreground="#FFE5572C" />
+            
+            <TextBlock Height="23" HorizontalAlignment="Left" Margin="67,20,0,0" Text="First Name:" VerticalAlignment="Top" Width="110" />
+            
+            <TextBlock Height="23" HorizontalAlignment="Left" Margin="67,50,0,0" Text="Last Name:" VerticalAlignment="Top" Width="110" />
+
+            <TextBlock Height="23" HorizontalAlignment="Left" Margin="67,80,0,0" Text="Gender:" VerticalAlignment="Top" Width="110"  />
+
+            <TextBlock Height="23" HorizontalAlignment="Left" Margin="67,113,0,0" Text="Date of birth:" VerticalAlignment="Top" Width="110"  />
+            
+            <TextBlock Height="23" HorizontalAlignment="Left" Margin="67,147,0,0" Text="Email" VerticalAlignment="Top" Width="110" />
+            
+            <TextBlock Height="23" HorizontalAlignment="Left" Margin="67,175,0,0" Text="Mobile Number:" VerticalAlignment="Top" Width="110" />
+
+
+            <TextBox Height="23" HorizontalAlignment="Left" Margin="183,20,0,0" VerticalAlignment="Top" Width="222" Text="{Binding Name,  UpdateSourceTrigger=LostFocus}" />
+
+            <TextBox Height="23" HorizontalAlignment="Left" Margin="183,50,0,0" VerticalAlignment="Top" Width="222" Text="{Binding Surname,  UpdateSourceTrigger=LostFocus}" />
+
+            <TextBox Height="23" HorizontalAlignment="Left" Margin="183,80,0,0" VerticalAlignment="Top" Width="84" Text="{Binding Gender,  UpdateSourceTrigger=LostFocus}"/>
+
+            <DatePicker HorizontalAlignment="Left" Margin="183,112,0,0"  VerticalAlignment="Top" Text="{Binding DateOfBirth,  UpdateSourceTrigger=PropertyChanged}"/>
+
+            <TextBox Height="23" HorizontalAlignment="Left" Margin="184,147,0,0" VerticalAlignment="Top" Width="222" Text="{Binding Email,  UpdateSourceTrigger=LostFocus}"/>
+
+            <TextBox Height="23" HorizontalAlignment="Left" Margin="183,175,0,0" VerticalAlignment="Top" Width="222" Text="{Binding MobileNumber,  UpdateSourceTrigger=PropertyChanged}"/>
+
+            <Button Content="Register" Height="23" HorizontalAlignment="Left" Margin="272,231,0,0" Name="Submit" VerticalAlignment="Top" Width="70" Command="{Binding RegisterNewPatientCommand}" />
+            
+            <Button Content="Cancel" Height="23" HorizontalAlignment="Right" Margin="0,231,38,0" Name="button3" VerticalAlignment="Top" Width="70" Click="button3_Click"/>
+
+        </Grid>
+    
+    </Grid>
+</Window>

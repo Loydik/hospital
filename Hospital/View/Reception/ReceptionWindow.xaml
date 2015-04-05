@@ -1,0 +1,46 @@
+﻿<Window x:Class="Hospital.View.Reception.ReceptionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vw="clr-namespace:Hospital.View.Reception"
+        xmlns:generalPatients="clr-namespace:Hospital.ViewModel.General.Patients"
+        xmlns:generalAppointments="clr-namespace:Hospital.ViewModel.General.Appointments"
+        xmlns:generalCases="clr-namespace:Hospital.ViewModel.General.Cases"
+        xmlns:vm="clr-namespace:Hospital.ViewModel.Reception"
+        Title="ReceptionWindow" Height="500" Width="700">
+
+<Window.Resources>
+        <DataTemplate DataType="{x:Type generalPatients:PatientsPageViewModel}">
+            <vw:PatientsControl />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type generalCases:CasesPageViewModel}">
+            <vw:CasesControl />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type generalAppointments:AppointmentsPageViewModel}">
+            <vw:AppointmentsControl />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:AdmissionsPageViewModel}">
+            <vw:AdmissionsPage/>
+        </DataTemplate>
+    </Window.Resources>
+
+    <Window.DataContext>
+        <vm:ReceptionViewModel />
+    </Window.DataContext>
+
+    <DockPanel>
+        <Border DockPanel.Dock="Left" BorderBrush="Black" BorderThickness="0,0,1,0">
+            <ItemsControl ItemsSource="{Binding PageViewModels}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Content="{Binding Name}"
+                                Command="{Binding DataContext.ChangePageCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                                CommandParameter="{Binding }"
+                                Margin="2,5"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Border>
+
+        <ContentControl Content="{Binding CurrentPageViewModel}" />
+    </DockPanel>
+</Window>

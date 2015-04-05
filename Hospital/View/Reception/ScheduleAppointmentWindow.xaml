@@ -1,0 +1,54 @@
+﻿<Window x:Class="Hospital.View.Reception.ScheduleAppointmentWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:Hospital.ViewModel.Reception"
+        Title="ScheduleAppointmentWindow" Height="391.045" Width="534.328">
+   
+    <Grid  Height="350" Width="525" Background="LightBlue">
+        <TextBlock Height="23" HorizontalAlignment="Left" Margin="10,5,0,0" Name="textBlockHeading" Text="Schedule Appointment:" VerticalAlignment="Top" Width="191"  FontSize="17" FontStretch="ExtraCondensed"/>
+
+        <Grid Margin="10,0,50,25" Background="White" Height="264" VerticalAlignment="Bottom">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="252*" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Height="20" HorizontalAlignment="Left" Margin="67,0,0,0" Text="{Binding ErrorMessage, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="247"  OpacityMask="Crimson" Foreground="#FFE5572C" />
+
+            <TextBlock Height="23" HorizontalAlignment="Left" Margin="67,20,0,0" Text="Patient:" VerticalAlignment="Top" Width="110" />
+
+            <TextBlock Height="23" HorizontalAlignment="Left" Margin="67,50,0,0" Text="Doctor:" VerticalAlignment="Top" Width="110" />
+
+            <TextBlock Height="23" HorizontalAlignment="Left" Margin="67,90,0,0" Text="Pick a date:" VerticalAlignment="Top" Width="110"  />
+
+            <TextBlock Height="23" HorizontalAlignment="Left" Margin="67,118,0,0" Text="Select time" VerticalAlignment="Top" Width="110" />
+
+            <TextBlock Height="23" HorizontalAlignment="Left" Margin="67,156,0,0" Text="Justification" VerticalAlignment="Top" Width="110" />
+
+            <TextBlock Height="23" HorizontalAlignment="Left" Margin="183,20,0,0" VerticalAlignment="Top" Width="222" Text="{Binding PatientName,  UpdateSourceTrigger=LostFocus}" />
+
+            <ComboBox 
+                ItemsSource="{Binding Doctors}"
+                DisplayMemberPath="FullInfo"
+                SelectedValuePath="DoctorID"
+                SelectedValue="{Binding Path=SelectedDoctorID}"
+                Height="23" HorizontalAlignment="Left" Margin="183,50,0,0" VerticalAlignment="Top" Width="222" />
+
+            <DatePicker 
+                SelectedDate="{Binding Path=AppointmentDate}"
+                HorizontalAlignment="Left" Margin="183,86,0,0"  VerticalAlignment="Top"/>
+
+            <ComboBox 
+                ItemsSource="{Binding AppointmentTimes}"
+                SelectedValue="{Binding Path=SelectedTime}"
+                Height="23" HorizontalAlignment="Left" Margin="183,118,0,0" VerticalAlignment="Top" Width="222" />
+
+            <TextBox Height="52" HorizontalAlignment="Left" Margin="183,156,0,0" VerticalAlignment="Top" Width="222" Text="{Binding Reason,  UpdateSourceTrigger=PropertyChanged}" />
+
+            <Button Content="Schedule" Height="23" HorizontalAlignment="Left" Margin="272,231,0,0" VerticalAlignment="Top" Width="70" Command="{Binding ScheduleAppointmentCommand}" Click="Button_Click_2" />
+
+            <Button Content="Cancel" Height="23" HorizontalAlignment="Right" Margin="0,231,38,0" VerticalAlignment="Top" Width="70" Click="Button_Click_1" />
+
+        </Grid>
+
+    </Grid>
+</Window>

@@ -1,0 +1,39 @@
+﻿<Window x:Class="Hospital.View.Laboratory.LaboratoryWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vw="clr-namespace:Hospital.View.Laboratory"
+        xmlns:vm="clr-namespace:Hospital.ViewModel.Laboratory"
+        xmlns:generalSamples="clr-namespace:Hospital.ViewModel.General.Samples"
+        xmlns:generalPatients="clr-namespace:Hospital.ViewModel.General.Patients"
+        Title="LaboratoryWindow" Height="500" Width="700">
+
+    <Window.DataContext>
+        <vm:LaboratoryViewModel />
+    </Window.DataContext>
+    
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type generalSamples:SamplesWindowViewModel}">
+            <vw:SamplesControl />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type generalPatients:PatientsPageViewModel}">
+            <vw:PatientsControl />
+        </DataTemplate>
+    </Window.Resources>
+
+    <DockPanel>
+        <Border DockPanel.Dock="Left" BorderBrush="Black" BorderThickness="0,0,1,0">
+            <ItemsControl ItemsSource="{Binding PageViewModels}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Content="{Binding Name}"
+                                Command="{Binding DataContext.ChangePageCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                                CommandParameter="{Binding }"
+                                Margin="2,5"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Border>
+
+        <ContentControl Content="{Binding CurrentPageViewModel}" />
+    </DockPanel>
+</Window>

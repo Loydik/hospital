@@ -1,0 +1,44 @@
+﻿<Window x:Class="Hospital.View.DoctorsArea.DoctorsAreaWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vw="clr-namespace:Hospital.View.DoctorsArea"
+        xmlns:generalPatients="clr-namespace:Hospital.ViewModel.General.Patients"
+        xmlns:generalAppointments="clr-namespace:Hospital.ViewModel.General.Appointments"
+        xmlns:generalCases="clr-namespace:Hospital.ViewModel.General.Cases"
+        xmlns:vm="clr-namespace:Hospital.ViewModel.DoctorsArea"
+        Title="DoctorsAreaWindow" Height="550" Width="700">
+
+    <Window.DataContext>
+        <vm:DoctorsAreaViewModel />
+    </Window.DataContext>
+    
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type generalPatients:PatientsPageViewModel}">
+            <vw:PatientsControl />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type generalAppointments:AppointmentsPageViewModel}">
+            <vw:AppointmentsControl />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type generalCases:CasesPageViewModel}">
+            <vw:CasesControl />
+        </DataTemplate>
+    </Window.Resources>
+
+    <DockPanel>
+        <Border DockPanel.Dock="Left" BorderBrush="Black" BorderThickness="0,0,1,0">
+            <ItemsControl ItemsSource="{Binding PageViewModels}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Content="{Binding Name}"
+                                Command="{Binding DataContext.ChangePageCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                                CommandParameter="{Binding }"
+                                Margin="2,5"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Border>
+
+        <ContentControl Content="{Binding CurrentPageViewModel}" />
+    </DockPanel>
+
+</Window>
